@@ -1,0 +1,10 @@
+^C:\USERS\AMONOV FOZIL\DESKTOP\LOYIHALAR\ONLINE_MARKET\BUILD\WINDOWS\CMAKEFILES\ED4B28878A6C8E20ED7A8DC64A142724\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/Amonov Fozil/Desktop/loyihalar/online_market/windows" "-BC:/Users/Amonov Fozil/Desktop/loyihalar/online_market/build/windows" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Amonov Fozil/Desktop/loyihalar/online_market/build/windows/online_market.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

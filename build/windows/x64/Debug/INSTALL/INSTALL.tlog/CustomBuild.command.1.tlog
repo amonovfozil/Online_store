@@ -1,0 +1,10 @@
+^C:\USERS\AMONOV FOZIL\DESKTOP\LOYIHALAR\ONLINE_MARKET\BUILD\WINDOWS\CMAKEFILES\ED4B28878A6C8E20ED7A8DC64A142724\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
