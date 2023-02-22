@@ -46,7 +46,7 @@ class ProductIteams extends StatelessWidget {
                         bottomLeft: Radius.circular(15))),
                 child: Center(
                   child: Text(
-                    '\$${productt.price.toStringAsFixed(0)}',
+                    '\$${productt.price.toStringAsFixed(1)}',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,

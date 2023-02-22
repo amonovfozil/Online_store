@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Product with ChangeNotifier {
   final String id;
@@ -60,15 +62,30 @@ class ProductList with ChangeNotifier {
     return [..._list];
   }
 
-  void Addproduct(Product _Product) {
-    final NewProduct = Product(
-        id: 'p${_list.length + 1}',
-        Title: _Product.Title,
-        Descriptions: _Product.Descriptions,
-        url: _Product.url,
-        price: _Product.price);
-    _list.add(NewProduct);
-    notifyListeners();
+  Future<void> Addproduct(Product _Product) {
+    final url = Uri.parse(
+        'https://marketdatebase-default-rtdb.firebaseio.com/products.json');
+    return http
+        .post(url,
+            body: jsonEncode({
+              "title": _Product.Title,
+              "Descriptions": _Product.Descriptions,
+              "url": _Product.url,
+              "price": _Product.price,
+              "Isfavorite": _Product.Isfavorite,
+            }))
+        .then((Javob) {
+      final javonID = (jsonDecode(Javob.body) as Map<String, dynamic>)['name'];
+
+      final NewProduct = Product(
+          id: javonID,
+          Title: _Product.Title,
+          Descriptions: _Product.Descriptions,
+          url: _Product.url,
+          price: _Product.price);
+      _list.add(NewProduct);
+      notifyListeners();
+    });
   }
 
   Product FindById(String Id) {

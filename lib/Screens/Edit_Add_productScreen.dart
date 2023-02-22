@@ -27,6 +27,7 @@ class _EditAddProducScreenState extends State<EditAddProducScreen> {
 
   var init = true;
   var hasImage = true;
+  var isLoading = false;
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -49,14 +50,26 @@ class _EditAddProducScreenState extends State<EditAddProducScreen> {
     if (TextIsNotEmty) {
       setState(() {
         _FormTextid.currentState!.save();
+        setState(() {
+          isLoading = true;
+        });
         if (_product.id.isEmpty) {
-          Provider.of<ProductList>(context, listen: false).Addproduct(_product);
+          Provider.of<ProductList>(context, listen: false)
+              .Addproduct(_product)
+              .then((_) {
+            setState(() {
+              isLoading = false;
+              Navigator.of(context).pop();
+            });
+          });
         } else {
           Provider.of<ProductList>(context, listen: false)
               .UpDateProduct(_product);
+          setState(() {
+            isLoading = false;
+            Navigator.of(context).pop();
+          });
         }
-
-        Navigator.of(context).pop();
       });
     }
     setState(() {
@@ -126,127 +139,131 @@ class _EditAddProducScreenState extends State<EditAddProducScreen> {
           IconButton(onPressed: () => _SaveForm(), icon: Icon(Icons.save)),
         ],
       ),
-      body: Form(
-          key: _FormTextid,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'nomi:',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.text,
-                  initialValue: _product.Title,
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Iltimos mahsulot nomini kiriting!';
-                    }
-                  }),
-                  onSaved: (newValue) {
-                    _product = Product(
-                        id: _product.id,
-                        Title: newValue!,
-                        Descriptions: _product.Descriptions,
-                        url: _product.url,
-                        price: _product.price);
-                  },
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'narx:',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
-                  initialValue:
-                      _product.price == 0 ? "" : _product.price.toString(),
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Iltimos mahsulot narxini kiriting!';
-                    } else if (double.tryParse(value) == null) {
-                      return 'Iltimos narxni to`g`ri kiriting';
-                    } else if (double.parse(value) < 1) {
-                      return 'Iltimos 0 dan katta qiymat bering';
-                    }
-                  }),
-                  onSaved: (newValue) {
-                    _product = Product(
-                        id: _product.id,
-                        Title: _product.Title,
-                        Descriptions: _product.Descriptions,
-                        url: _product.url,
-                        price: double.parse(newValue!));
-                  },
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'tarif:',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.text,
-                  maxLines: 5,
-                  initialValue: _product.Descriptions,
-                  validator: ((value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Iltimos mahsulotga tarif bering!';
-                    } else if (value.length < 40) {
-                      return 'Tarif 10 ta so`zdan kam bulmasin!  ';
-                    }
-                  }),
-                  onSaved: (newValue) {
-                    _product = Product(
-                        id: _product.id,
-                        Title: _product.Title,
-                        Descriptions: newValue!,
-                        url: _product.url,
-                        price: _product.price);
-                  },
-                ),
-                SizedBox(height: 10),
-                Card(
-                  clipBehavior: Clip.hardEdge,
-                  margin: const EdgeInsets.all(0),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: hasImage
-                              ? Colors.grey
-                              : Theme.of(context).errorColor),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: InkWell(
-                    onTap: () => ShowImageURLEnter(context),
-                    splashColor: Theme.of(context).primaryColor,
-                    child: Container(
-                      height: 200,
-                      width: double.infinity,
-                      child: _product.url.isEmpty
-                          ? Center(
-                              child: Text(
-                              'Rasm URLni kiriting?',
-                              style: TextStyle(
-                                  color: hasImage
-                                      ? Colors.black.withOpacity(0.7)
-                                      : Theme.of(context).errorColor),
-                            ))
-                          : _product.url.startsWith('assets/')
-                              ? Image.asset(
-                                  _product.url,
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                )
-                              : Image.network(
-                                  _product.url,
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                ),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Form(
+              key: _FormTextid,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'nomi:',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.text,
+                      initialValue: _product.Title,
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Iltimos mahsulot nomini kiriting!';
+                        }
+                      }),
+                      onSaved: (newValue) {
+                        _product = Product(
+                            id: _product.id,
+                            Title: newValue!,
+                            Descriptions: _product.Descriptions,
+                            url: _product.url,
+                            price: _product.price);
+                      },
                     ),
-                  ),
-                )
-              ],
-            ),
-          )),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'narx:',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      initialValue:
+                          _product.price == 0 ? "" : _product.price.toString(),
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Iltimos mahsulot narxini kiriting!';
+                        } else if (double.tryParse(value) == null) {
+                          return 'Iltimos narxni to`g`ri kiriting';
+                        } else if (double.parse(value) < 1) {
+                          return 'Iltimos 0 dan katta qiymat bering';
+                        }
+                      }),
+                      onSaved: (newValue) {
+                        _product = Product(
+                            id: _product.id,
+                            Title: _product.Title,
+                            Descriptions: _product.Descriptions,
+                            url: _product.url,
+                            price: double.parse(newValue!));
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'tarif:',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.text,
+                      maxLines: 5,
+                      initialValue: _product.Descriptions,
+                      validator: ((value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Iltimos mahsulotga tarif bering!';
+                        } else if (value.length < 40) {
+                          return 'Tarif 10 ta so`zdan kam bulmasin!  ';
+                        }
+                      }),
+                      onSaved: (newValue) {
+                        _product = Product(
+                            id: _product.id,
+                            Title: _product.Title,
+                            Descriptions: newValue!,
+                            url: _product.url,
+                            price: _product.price);
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    Card(
+                      clipBehavior: Clip.hardEdge,
+                      margin: const EdgeInsets.all(0),
+                      shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              color: hasImage
+                                  ? Colors.grey
+                                  : Theme.of(context).errorColor),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: InkWell(
+                        onTap: () => ShowImageURLEnter(context),
+                        splashColor: Theme.of(context).primaryColor,
+                        child: Container(
+                          height: 200,
+                          width: double.infinity,
+                          child: _product.url.isEmpty
+                              ? Center(
+                                  child: Text(
+                                  'Rasm URLni kiriting?',
+                                  style: TextStyle(
+                                      color: hasImage
+                                          ? Colors.black.withOpacity(0.7)
+                                          : Theme.of(context).errorColor),
+                                ))
+                              : _product.url.startsWith('assets/')
+                                  ? Image.asset(
+                                      _product.url,
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                    )
+                                  : Image.network(
+                                      _product.url,
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                    ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )),
     );
   }
 }

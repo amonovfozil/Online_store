@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\runner\flutter_window.cpp">
+    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\runner\flutter_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\runner\main.cpp">
+    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\runner\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\runner\utils.cpp">
+    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\runner\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\runner\win32_window.cpp">
+    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\runner\win32_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\flutter\generated_plugin_registrant.cc">
+    <ClCompile Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\flutter\generated_plugin_registrant.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\runner\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\runner\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\windows\runner\Runner.rc">
+    <ResourceCompile Include="C:\Users\Amonov Fozil\Desktop\online_Store\windows\runner\Runner.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{090BAD90-3079-3413-B51A-17E421580534}</UniqueIdentifier>
+      <UniqueIdentifier>{2FD91FEB-801C-3B13-9FE9-1884C4DB8F44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

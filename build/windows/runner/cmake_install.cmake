@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Amonov Fozil/Desktop/loyihalar/online_market/windows/runner
+# Install script for directory: C:/Users/Amonov Fozil/Desktop/online_Store/windows/runner
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

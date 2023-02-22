@@ -2,19 +2,19 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\build\windows\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>C:\Users\Amonov Fozil\Desktop\online_Store\build\windows\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\build\windows\flutter\x64\Debug\flutter_assemble</FullPath>
+      <FullPath>C:\Users\Amonov Fozil\Desktop\online_Store\build\windows\flutter\x64\Debug\flutter_assemble</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\build\windows\runner\Debug\online_market.exe</FullPath>
+      <FullPath>C:\Users\Amonov Fozil\Desktop\online_Store\build\windows\runner\Debug\online_market.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\build\windows\x64\Debug\ALL_BUILD</FullPath>
+      <FullPath>C:\Users\Amonov Fozil\Desktop\online_Store\build\windows\x64\Debug\ALL_BUILD</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Amonov Fozil\Desktop\loyihalar\online_market\build\windows\x64\Debug\INSTALL</FullPath>
+      <FullPath>C:\Users\Amonov Fozil\Desktop\online_Store\build\windows\x64\Debug\INSTALL</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

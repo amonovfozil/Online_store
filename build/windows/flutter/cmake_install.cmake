@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Amonov Fozil/Desktop/loyihalar/online_market/windows/flutter
+# Install script for directory: C:/Users/Amonov Fozil/Desktop/online_Store/windows/flutter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
