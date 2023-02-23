@@ -4,11 +4,16 @@ import 'package:provider/provider.dart';
 import '../models/Carts_model.dart';
 import '../models/product_model.dart';
 
-class ProductIteams extends StatelessWidget {
+class ProductIteams extends StatefulWidget {
   const ProductIteams({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ProductIteams> createState() => _ProductIteamsState();
+}
+
+class _ProductIteamsState extends State<ProductIteams> {
   @override
   Widget build(BuildContext context) {
     final productt = Provider.of<Product>(context);
@@ -57,7 +62,7 @@ class ProductIteams extends StatelessWidget {
             ),
           ]),
           footer: Container(
-            height: 50,
+            height: 60,
             width: double.infinity,
             color: Colors.black.withOpacity(0.7),
             child: Padding(
@@ -74,12 +79,16 @@ class ProductIteams extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  Text(
-                    productt.Title,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 18),
+                  Container(
+                    alignment: Alignment.center,
+                    width: 250,
+                    child: Text(
+                      productt.Title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 18),
+                    ),
                   ),
                   IconButton(
                     onPressed: () {

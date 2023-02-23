@@ -44,15 +44,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        orderIteams.addOrder(
-                            carts.TotalPrice, carts.Carts.values.toList());
-                        carts.CleanListByOrder();
-                        print(orderIteams.lists);
-                      },
-                      child: Text('BYURTMA BERISH'),
-                    )
+                    orderButon(orderIteams: orderIteams, carts: carts)
                   ],
                 ),
               ),
@@ -165,6 +157,46 @@ class CartScreen extends StatelessWidget {
                   })))
         ],
       ),
+    );
+  }
+}
+
+class orderButon extends StatefulWidget {
+  const orderButon({
+    Key? key,
+    required this.orderIteams,
+    required this.carts,
+  }) : super(key: key);
+
+  final orderIteam orderIteams;
+  final CartIteams carts;
+
+  @override
+  State<orderButon> createState() => _orderButonState();
+}
+
+class _orderButonState extends State<orderButon> {
+  var _isloading = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: (widget.carts.Carts.isEmpty || _isloading == true)
+          ? null
+          : () async {
+              setState(() {
+                _isloading = true;
+              });
+              await widget.orderIteams.addOrder(
+                  widget.carts.TotalPrice, widget.carts.Carts.values.toList());
+              setState(() {
+                _isloading = false;
+              });
+              widget.carts.CleanListByOrder();
+              Navigator.of(context).pushReplacementNamed('Byurtmalar');
+            },
+      child: _isloading
+          ? Container(height: 20, width: 20, child: CircularProgressIndicator())
+          : Text('BYURTMA BERISH'),
     );
   }
 }

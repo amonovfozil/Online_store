@@ -44,33 +44,31 @@ class _EditAddProducScreenState extends State<EditAddProducScreen> {
     init = false;
   }
 
-  void _SaveForm() {
+  Future<void> _SaveForm() async {
     final TextIsNotEmty = _FormTextid.currentState!.validate();
     print(TextIsNotEmty);
     if (TextIsNotEmty) {
+      _FormTextid.currentState!.save();
       setState(() {
-        _FormTextid.currentState!.save();
-        setState(() {
-          isLoading = true;
-        });
-        if (_product.id.isEmpty) {
-          Provider.of<ProductList>(context, listen: false)
-              .Addproduct(_product)
-              .then((_) {
-            setState(() {
-              isLoading = false;
-              Navigator.of(context).pop();
-            });
-          });
-        } else {
-          Provider.of<ProductList>(context, listen: false)
-              .UpDateProduct(_product);
+        isLoading = true;
+      });
+      if (_product.id.isEmpty) {
+        await Provider.of<ProductList>(context, listen: false)
+            .Addproduct(_product)
+            .then((_) {
           setState(() {
             isLoading = false;
             Navigator.of(context).pop();
           });
-        }
-      });
+        });
+      } else {
+        await Provider.of<ProductList>(context, listen: false)
+            .UpDateProduct(_product);
+        setState(() {
+          isLoading = false;
+          Navigator.of(context).pop();
+        });
+      }
     }
     setState(() {
       hasImage = false;

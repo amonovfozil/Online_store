@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:online_market/Screens/Edit_Add_productScreen.dart';
-import 'package:online_market/Screens/magetment_Screen.dart';
+import '../Screens/Edit_Add_productScreen.dart';
+import '../Screens/magetment_Screen.dart';
 import '../Screens/Cart_screen.dart';
 import '../Screens/Home_Screen.dart';
 import '../Screens/Info_Product.dart';
