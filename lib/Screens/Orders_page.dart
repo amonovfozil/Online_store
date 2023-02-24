@@ -15,9 +15,9 @@ class _OrderPageState extends State<OrderPage> {
   @override
   void initState() {
     // TODO: implement initState
-    // Future.delayed(Duration.zero).then((_) {
-    //   Provider.of<orderIteam>(context, listen: false).GetOrderInFirebase();
-    // });
+    Future.delayed(Duration.zero).then((_) {
+      Provider.of<orderIteam>(context, listen: false).GetOrderInFirebase();
+    });
     super.initState();
   }
 
