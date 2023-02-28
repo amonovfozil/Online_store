@@ -7,6 +7,8 @@ C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutt
 C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/iw1.jpg
 C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/iw2.jpg
 C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/iw3.jpg
+C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/logo.png
+C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/logo1.jpg
 C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/mac1.jpg
 C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/mac2.jpg
 C:/Users/Amonov Fozil/Desktop/online_Store/build/windows/runner/Debug/data/flutter_assets/assets/images/mac3.jpg

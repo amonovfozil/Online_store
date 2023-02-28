@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:online_market/Screens/Auth_PageScreen.dart';
+import 'package:online_market/providers/auth.dart';
 import '../Screens/Edit_Add_productScreen.dart';
 import '../Screens/magetment_Screen.dart';
 import '../Screens/Cart_screen.dart';
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<AuthProvider>(
+            create: (context) => AuthProvider()),
         ChangeNotifierProvider<ProductList>(
           create: ((context) => ProductList()),
         ),
@@ -33,8 +37,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             primaryColor: Colors.teal.shade600, primarySwatch: Colors.teal),
         debugShowCheckedModeBanner: false,
+        home: AuthScreen(),
         routes: {
-          '/': (context) => HomeScreen(),
+          '/home': (context) => HomeScreen(),
           "CartScreen": (context) => CartScreen(),
           "InfoProduct": (context) => InfoProduct(),
           "Byurtmalar": (context) => OrderPage(),

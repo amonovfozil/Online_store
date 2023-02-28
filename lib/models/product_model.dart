@@ -37,37 +37,7 @@ class Product with ChangeNotifier {
 }
 
 class ProductList with ChangeNotifier {
-  List<Product> _list = [
-    // Product(
-    //     id: 'p1',
-    //     Title: 'MacBook Pro',
-    //     Descriptions:
-    //         'holati yaxshi , karopka dakument, 85% yomkist, 146 sicly ishlagan, 16/512 Gb SSD, chip:M1',
-    //     url: 'assets/images/mac2.jpg',
-    //     price: 950),
-    // Product(
-    //     id: 'p2',
-    //     Title: 'IPad',
-    //     Descriptions:
-    //         'holati yaxshi , karopka dakument, 82% yomkist, 1, 8/128 Gb , chip:M',
-    //     url: 'assets/images/ip3.jpg',
-    //     price: 560),
-    // Product(
-    //     id: 'p3',
-    //     Title: 'IPhone14',
-    //     Descriptions:
-    //         'holati yaxshi , karopka dakument, 95% yomkist, 16/256 Gb, ',
-    //     url: 'assets/images/p.jpg',
-    //     price: 1025),
-    // Product(
-    //   id: 'p4',
-    //   Title: 'IWatch',
-    //   Descriptions:
-    //       'holati yangi , karopka dakument, , 10 sicly ishlagan, faceId, NTF,Bluethuth',
-    //   url: 'assets/images/iw2.jpg',
-    //   price: 325,
-    // ),
-  ];
+  List<Product> _list = [];
 
   List<Product> get Lists {
     return [..._list];
@@ -95,7 +65,9 @@ class ProductList with ChangeNotifier {
         _list = insertProducts;
         notifyListeners();
       });
-    } catch (error) {}
+    } catch (error) {
+      return;
+    }
   }
 
   Future<void> Addproduct(Product _Product) async {
