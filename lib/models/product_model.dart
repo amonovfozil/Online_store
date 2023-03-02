@@ -49,9 +49,10 @@ class ProductList with ChangeNotifier {
     userID = USERID;
   }
 
-  Future<void> getProductsInFireBase() async {
+  Future<void> getProductsInFireBase([bool filter = false]) async {
+    final filterString = filter ? 'orderBy="createrID"&equalTo="$userID"' : '';
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products.json?auth=$_token');
+        'https://marketdatebase-default-rtdb.firebaseio.com/products.json?auth=$_token&$filterString');
     final urlfavority = Uri.parse(
         'https://marketdatebase-default-rtdb.firebaseio.com/userFavority/$userID.json?auth=$_token');
 
@@ -93,6 +94,7 @@ class ProductList with ChangeNotifier {
             "Descriptions": _Product.Descriptions,
             "url": _Product.url,
             "price": _Product.price,
+            'createrID': userID,
           }));
 
       final javonID = (jsonDecode(Javob.body) as Map<String, dynamic>)['name'];
