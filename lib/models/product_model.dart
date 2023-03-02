@@ -19,17 +19,15 @@ class Product with ChangeNotifier {
     this.Isfavorite = false,
   });
 
-  Future<void> isclickFavorite() async {
+  Future<void> isclickFavorite(String token, String userID) async {
     final oldIs = Isfavorite;
     Isfavorite = !Isfavorite;
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products/$id.json');
+        'https://marketdatebase-default-rtdb.firebaseio.com/userFavority/$userID/$id.json?auth=$token');
     try {
-      http.patch(
+      http.put(
         url,
-        body: jsonEncode(
-          {"Isfavorite": Isfavorite},
-        ),
+        body: jsonEncode(Isfavorite),
       );
     } catch (error) {}
     notifyListeners();
@@ -43,13 +41,27 @@ class ProductList with ChangeNotifier {
     return [..._list];
   }
 
+  String? _token;
+  String? userID;
+
+  void getAuthToken(String token, String USERID) {
+    _token = token;
+    userID = USERID;
+  }
+
   Future<void> getProductsInFireBase() async {
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products.json');
+        'https://marketdatebase-default-rtdb.firebaseio.com/products.json?auth=$_token');
+    final urlfavority = Uri.parse(
+        'https://marketdatebase-default-rtdb.firebaseio.com/userFavority/$userID.json?auth=$_token');
+
     try {
       final respons = await http.get(url);
+      final favorityrespons = await http.get(urlfavority);
       // if (jsonDecode(respons.body) != null) {
       final DataBase = jsonDecode(respons.body) as Map<String, dynamic>;
+      final DataFavority = jsonDecode(favorityrespons.body);
+
       final List<Product> insertProducts = [];
       DataBase.forEach((productId, products) {
         insertProducts.add(
@@ -59,7 +71,8 @@ class ProductList with ChangeNotifier {
             Descriptions: products['Descriptions'],
             url: products['url'],
             price: products['price'],
-            Isfavorite: products['Isfavorite'],
+            Isfavorite:
+                DataFavority == false ? true : DataFavority[productId] ?? false,
           ),
         );
         _list = insertProducts;
@@ -72,7 +85,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> Addproduct(Product _Product) async {
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products.json');
+        'https://marketdatebase-default-rtdb.firebaseio.com/products.json?auth=$_token');
     try {
       final Javob = await http.post(url,
           body: jsonEncode({
@@ -80,7 +93,6 @@ class ProductList with ChangeNotifier {
             "Descriptions": _Product.Descriptions,
             "url": _Product.url,
             "price": _Product.price,
-            "Isfavorite": _Product.Isfavorite,
           }));
 
       final javonID = (jsonDecode(Javob.body) as Map<String, dynamic>)['name'];
@@ -106,7 +118,7 @@ class ProductList with ChangeNotifier {
     final indexproduct =
         _list.indexWhere((element) => element.id == updateProduct.id);
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products/${updateProduct.id}.json');
+        'https://marketdatebase-default-rtdb.firebaseio.com/products/${updateProduct.id}.json?auth=$_token');
     try {
       await http.patch(
         url,
@@ -132,7 +144,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> DeleteProduct(String ID) async {
     final Url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products/$ID.json');
+        'https://marketdatebase-default-rtdb.firebaseio.com/products/$ID.json?auth=$_token');
     try {
       await http.delete(Url);
       _list.removeWhere((element) => element.id == ID);

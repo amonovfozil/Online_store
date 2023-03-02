@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_market/providers/auth.dart';
 import 'package:provider/provider.dart';
 
 import '../models/Carts_model.dart';
@@ -18,6 +19,7 @@ class _ProductIteamsState extends State<ProductIteams> {
   Widget build(BuildContext context) {
     final productt = Provider.of<Product>(context);
     final cartIatems = Provider.of<CartIteams>(context);
+    final AuthProviderr = Provider.of<AuthProvider>(context);
     return InkWell(
       onTap: (() =>
           Navigator.of(context).pushNamed('InfoProduct', arguments: productt)),
@@ -71,7 +73,8 @@ class _ProductIteamsState extends State<ProductIteams> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () => productt.isclickFavorite(),
+                    onPressed: () => productt.isclickFavorite(
+                        AuthProviderr.Token!, AuthProviderr.UserID!),
                     icon: Icon(
                       productt.Isfavorite
                           ? Icons.favorite
