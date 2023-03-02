@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProxyProvider<AuthProvider, ProductList>(
             create: ((context) => ProductList()),
             update: (context, auth, previousProducts) =>
-                previousProducts!..getAuthToken(auth.Token!, auth.UserID!),
+                previousProducts!..getAuthToken(auth.Token, auth.UserID),
           ),
           ChangeNotifierProvider<CartIteams>(
             create: ((context) => CartIteams()),
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProxyProvider<AuthProvider, orderIteam>(
             create: ((context) => orderIteam()),
             update: (context, auth, previousOrders) =>
-                previousOrders!..GetAuthToken(auth.Token!),
+                previousOrders!..GetAuthToken(auth.Token, auth.UserID),
           )
         ],
         child: Consumer<AuthProvider>(builder: ((context, AuthData, child) {
@@ -43,6 +43,16 @@ class MyApp extends StatelessWidget {
                 primaryColor: Colors.teal.shade600, primarySwatch: Colors.teal),
             debugShowCheckedModeBanner: false,
             home: AuthData.isAuth ? HomeScreen() : AuthScreen(),
+            // :FutureBuilder(
+            //         future: AuthData.AutoLogin(),
+            //         builder: (c, autoLoginData) {
+            //           if (autoLoginData.connectionState ==
+            //               ConnectionState.waiting) {
+            //             return Center(child: const CircularProgressIndicator());
+            //           } else {
+            //             return const AuthScreen();
+            //           }
+            //         }),
             routes: {
               '/home': (context) => HomeScreen(),
               "CartScreen": (context) => CartScreen(),

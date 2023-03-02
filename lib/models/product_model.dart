@@ -44,7 +44,7 @@ class ProductList with ChangeNotifier {
   String? _token;
   String? userID;
 
-  void getAuthToken(String token, String USERID) {
+  void getAuthToken(String? token, String? USERID) {
     _token = token;
     userID = USERID;
   }

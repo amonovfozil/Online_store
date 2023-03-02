@@ -117,10 +117,11 @@ class _AuthScreenState extends State<AuthScreen> {
             key: _TextForm,
             child: Column(
               children: [
+                SizedBox(height: 50),
                 Image.asset(
                   'assets/images/logo1.jpg',
-                  width: 200,
-                  height: 200,
+                  width: 250,
+                  height: 250,
                 ),
                 const SizedBox(height: 40),
                 TextFormField(

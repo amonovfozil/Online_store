@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:online_market/providers/auth.dart';
+import 'package:provider/provider.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({super.key});
@@ -28,6 +30,15 @@ class SideBar extends StatelessWidget {
           CreatMenu(context, 'Byurtmalar', Icons.shop_two_sharp, 'Byurtmalar'),
           CreatMenu(context, 'Mahsulotlarni Boshqarish ', Icons.settings,
               'ManegmentScreen'),
+          Card(
+            elevation: 2,
+            child: ListTile(
+              onTap: () =>
+                  Provider.of<AuthProvider>(context, listen: false).LogOut(),
+              leading: Icon(Icons.logout),
+              title: Text('Tizimdan Chiqish'),
+            ),
+          ),
         ],
       ),
     );

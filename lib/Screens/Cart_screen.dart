@@ -120,8 +120,8 @@ class CartScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w500),
                             ),
-                            subtitle:
-                                Text('Umumiy: \$${cart.amount * cart.price}'),
+                            subtitle: Text(
+                                'Umumiy: \$${(cart.amount * cart.price).toStringAsFixed(1)}'),
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
