@@ -23,7 +23,7 @@ class Product with ChangeNotifier {
     final oldIs = Isfavorite;
     Isfavorite = !Isfavorite;
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/userFavority/$userID/$id.json?auth=$token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/userFavority/$userID/$id.json?auth=$token');
     try {
       http.put(
         url,
@@ -50,35 +50,38 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> getProductsInFireBase([bool filter = false]) async {
-    final filterString = filter ? 'orderBy="createrID"&equalTo="$userID"' : '';
-    final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products.json?auth=$_token&$filterString');
+    var filterString = filter ? 'orderBy="createrID"&equalTo="$userID"' : '';
+    Uri url = Uri.parse(
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/products.json?auth=$_token&$filterString');
     final urlfavority = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/userFavority/$userID.json?auth=$_token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/userFavority/$userID.json?auth=$_token');
 
     try {
       final respons = await http.get(url);
       final favorityrespons = await http.get(urlfavority);
-      // if (jsonDecode(respons.body) != null) {
-      final DataBase = jsonDecode(respons.body) as Map<String, dynamic>;
-      final DataFavority = jsonDecode(favorityrespons.body);
+      if (jsonDecode(respons.body) != null) {
+        final DataBase = jsonDecode(respons.body) as Map<String, dynamic>;
+        final DataFavority = jsonDecode(favorityrespons.body);
 
-      final List<Product> insertProducts = [];
-      DataBase.forEach((productId, products) {
-        insertProducts.add(
-          Product(
-            id: productId,
-            Title: products['title'],
-            Descriptions: products['Descriptions'],
-            url: products['url'],
-            price: products['price'],
-            Isfavorite:
-                DataFavority == false ? true : DataFavority[productId] ?? false,
-          ),
-        );
-        _list = insertProducts;
-        notifyListeners();
-      });
+        final List<Product> insertProducts = [];
+        DataBase.forEach((productId, products) {
+          insertProducts.add(
+            Product(
+              id: productId,
+              Title: products['title'],
+              Descriptions: products['Descriptions'],
+              url: products['url'],
+              price: products['price'],
+              Isfavorite: DataFavority == false
+                  ? true
+                  : DataFavority[productId] ?? false,
+            ),
+          );
+          _list = insertProducts;
+
+          notifyListeners();
+        });
+      }
     } catch (error) {
       return;
     }
@@ -86,7 +89,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> Addproduct(Product _Product) async {
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products.json?auth=$_token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/products.json?auth=$_token');
     try {
       final Javob = await http.post(url,
           body: jsonEncode({
@@ -120,7 +123,7 @@ class ProductList with ChangeNotifier {
     final indexproduct =
         _list.indexWhere((element) => element.id == updateProduct.id);
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products/${updateProduct.id}.json?auth=$_token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/products/${updateProduct.id}.json?auth=$_token');
     try {
       await http.patch(
         url,
@@ -146,7 +149,7 @@ class ProductList with ChangeNotifier {
 
   Future<void> DeleteProduct(String ID) async {
     final Url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/products/$ID.json?auth=$_token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/products/$ID.json?auth=$_token');
     try {
       await http.delete(Url);
       _list.removeWhere((element) => element.id == ID);

@@ -65,8 +65,8 @@ class _AuthScreenState extends State<AuthScreen> {
           );
         }
       } on HttpException catch (error) {
+        print(error);
         var message = 'Xatolik Sodir bo`ldi';
-        print(message);
         if (error.message.contains('EMAIL_EXISTS')) {
           message = 'Bu email manzil ro`yxatdan o`tgan';
         } else if (error.message.contains('TOO_MANY_ATTEMPTS_TRY_LATER')) {
@@ -80,6 +80,8 @@ class _AuthScreenState extends State<AuthScreen> {
         }
         _showError(message);
       } catch (error) {
+        print(error);
+
         var message = 'Xatolik sodir bo`ldi, Iltimos qayta urinib ko`ring';
         _showError(message);
       }

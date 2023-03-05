@@ -17,9 +17,10 @@ class _part_homeState extends State<part_home> {
   @override
   void initState() {
     // TODO: implement initState
-    // Future.delayed(Duration.zero).then((value) {
-    // Provider.of<ProductList>(context, listen: false).getProductsInFireBase();
-    // });
+    Future.delayed(Duration.zero).then((value) {
+      Provider.of<ProductList>(context, listen: false)
+          .getProductsInFireBase(false);
+    });
     super.initState();
   }
 

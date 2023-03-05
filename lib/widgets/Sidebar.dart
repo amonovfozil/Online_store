@@ -33,8 +33,10 @@ class SideBar extends StatelessWidget {
           Card(
             elevation: 2,
             child: ListTile(
-              onTap: () =>
-                  Provider.of<AuthProvider>(context, listen: false).LogOut(),
+              onTap: () {
+                Navigator.of(context).pop();
+                Provider.of<AuthProvider>(context, listen: false).LogOut();
+              },
               leading: Icon(Icons.logout),
               title: Text('Tizimdan Chiqish'),
             ),

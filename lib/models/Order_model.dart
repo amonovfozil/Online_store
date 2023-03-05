@@ -33,7 +33,7 @@ class orderIteam with ChangeNotifier {
 
   Future<void> GetOrderInFirebase() async {
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/$_userID/orders.json?auth=$_Token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/$_userID/orders.json?auth=$_Token');
     try {
       final DataFrebase = await http.get(url);
       if (jsonDecode(DataFrebase.body) != null) {
@@ -71,7 +71,7 @@ class orderIteam with ChangeNotifier {
 
   Future<void> addOrder(double TotalPrice, List<cart> Carts) async {
     final url = Uri.parse(
-        'https://marketdatebase-default-rtdb.firebaseio.com/$_userID/orders.json?auth=$_Token');
+        'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/$_userID/orders.json?auth=$_Token');
     try {
       final DataOrder = await http.post(
         url,

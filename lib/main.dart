@@ -42,17 +42,20 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 primaryColor: Colors.teal.shade600, primarySwatch: Colors.teal),
             debugShowCheckedModeBanner: false,
-            home: AuthData.isAuth ? HomeScreen() : AuthScreen(),
-            // :FutureBuilder(
-            //         future: AuthData.AutoLogin(),
-            //         builder: (c, autoLoginData) {
-            //           if (autoLoginData.connectionState ==
-            //               ConnectionState.waiting) {
-            //             return Center(child: const CircularProgressIndicator());
-            //           } else {
-            //             return const AuthScreen();
-            //           }
-            //         }),
+            home: AuthData.isAuth
+                ? HomeScreen()
+                : FutureBuilder(
+                    future: AuthData.autoLogin(),
+                    builder: ((c, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return AuthScreen();
+                      }
+                    }),
+                  ),
             routes: {
               '/home': (context) => HomeScreen(),
               "CartScreen": (context) => CartScreen(),
