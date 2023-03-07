@@ -18,8 +18,7 @@ class _part_homeState extends State<part_home> {
   void initState() {
     // TODO: implement initState
     Future.delayed(Duration.zero).then((value) {
-      Provider.of<ProductList>(context, listen: false)
-          .getProductsInFireBase(false);
+      Provider.of<ProductList>(context, listen: false).getProductsInFireBase();
     });
     super.initState();
   }

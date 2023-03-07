@@ -50,6 +50,7 @@ class ProductList with ChangeNotifier {
   }
 
   Future<void> getProductsInFireBase([bool filter = false]) async {
+    print(filter);
     var filterString = filter ? 'orderBy="createrID"&equalTo="$userID"' : '';
     Uri url = Uri.parse(
         'https://onlinestrore-1cd2a-default-rtdb.firebaseio.com/products.json?auth=$_token&$filterString');
